@@ -1,16 +1,25 @@
 # frozen_string_literal: true
 
-require "bundler/setup"
+require "webmock/rspec"
 require "se_providers_api_client"
+require "vcr"
+include SeProvidersApiClient::Resources
+
+APP_ROOT = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+cnf = YAML.load_file(File.join(APP_ROOT, "config/gem_secret.yml"))
+se_providers_api_key = cnf["se_providers_api_key"]
+
+API_TEST_HOST = "https://demo.scienceexchange.com/api/providers/v1/"
+
+VCR.configure do |c|
+  c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  c.hook_into :webmock
+  c.filter_sensitive_data("<SE_PROVIDERS_API_KEY>") { se_providers_api_key }
+end
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
-
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
-
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
+  config.before do
+    SeProvidersApiClient.api_key = se_providers_api_key
+    SeProvidersApiClient.url = API_TEST_HOST
   end
 end

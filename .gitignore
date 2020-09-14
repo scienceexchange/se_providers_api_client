@@ -8,6 +8,7 @@
 /tmp/
 .idea/
 /Gemfile.lock
+/config/gem_secret.yml
 
 # rspec failure tracking
 .rspec_status
