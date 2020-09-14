@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://www.scienceexchange.com"
 
   spec.summary       = "A Ruby wrapper for the Science Exchange Providers API."
+  spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   # Specify which files should be added to the gem when it is released.
