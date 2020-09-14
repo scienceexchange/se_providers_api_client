@@ -12,7 +12,7 @@ module SeProvidersApiClient
         params = options[:params] || raise(ArgumentError, "Must supply :params")
         params.delete_if { |_k, v| v.blank? }
         params = params.to_query
-        query = path
+        query = path.dup
         query << ("?" + params) unless params.blank?
         query
       end

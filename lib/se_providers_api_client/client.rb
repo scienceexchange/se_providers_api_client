@@ -43,7 +43,7 @@ module SeProvidersApiClient
       msg = "Unsupported method #{method.inspect}. Only :get, :post, :put, :delete are allowed"
       raise ArgumentError, msg unless REQUESTS.include?(method)
 
-      token_url = UrlHelper.build_url(path: "#{@url}#{path}", params: {access_token: @api_key})
+      token_url = UrlHelper.build_url(path: "#{@url}#{path}", params: { access_token: @api_key })
       payload = nil
       if query.present?
         accept = headers.present? ? headers["Accept"] : nil
