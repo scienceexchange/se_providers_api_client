@@ -14,4 +14,9 @@ describe SeProvidersApiClient::DSL::RFQEvents do
       end
     end
   end
+
+  describe "#get_rfq_event" do
+    it "raises a not implemented error" do
+    end
+  end
 end
